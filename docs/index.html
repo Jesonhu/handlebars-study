@@ -20,11 +20,9 @@
       repo: 'https://github.com/Jesonhu/handlebars-study/',
       loadSidebar: true,
 
-      // alias: {
-      //   '/.*/_sidebar.md': '/_sidebar.md'
-      // },
-      // 定制 sidebar 文件名方式. 采取下面这种写法.
-      loadSidebar: 'summary.md',
+      alias: {
+        '.*/_sidebar.md': '/summary.md'
+      },
       
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
       maxLevel: 4,
