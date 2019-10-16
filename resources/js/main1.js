@@ -5,7 +5,7 @@
       this.setHbHtml('tpl1', context);
 
       const context2 = this.getData2();
-      this.setHbHtml('tpl1', context2);
+      this.setHbHtml('tpl1_1', context2);
 
       this.testJsScript();
 
@@ -51,7 +51,7 @@
     },
 
     getData2() {
-      return {title: "我是模板复用标题", body: "<p>这是标题内容!</p>"}
+      return {title: "我是模板复用标题", body: "<div><p><strong><a href='http://www.baidu.com' target='_blank'><span>我是内容</span></a></strong><p></div>"}
     },
 
     getListData() {
@@ -74,9 +74,11 @@
 
     getEachInnerListData() {
       return {
-        // title: '内置 each list 遍历',
-        list: ['js', 'html', 'css'],
-        error: "数据请求错误"
+        title: '<p><span>内置 each list 遍历aaa<strong><i>11</i></strong></span></p>',
+        list: {
+          list: ['js', 'html', 'css'],
+          error: "数据请求错误"
+        }
       }
     }
   }

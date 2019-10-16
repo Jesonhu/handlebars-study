@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>块表达式</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script id="tpl_1" type="text/x-handlebars-template">
+    <div class="peopele">
+      <ul>
+        {{#list people}}
+        {{lastName}} {{firstName}}
+        {{/list}}
+      </ul>
+    </div>
+  </script>
+  <script src="./resources/libs/handlebars/handlebars-v4.4.3.js"></script>
+  <script src="./resources/js/main2.js"></script>
+  <script>
+    !(function() {
+      const main = window.__MAIN__;
+
+      main.init();
+    })();
+  </script>
+</body>
+</html>

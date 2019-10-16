@@ -21,6 +21,16 @@
     </div>
   </script>
 
+  <!-- HTML Escaping -->
+  <script id="tpl1_1" type="text/x-handlebars-template">
+    <div class="entry">
+      <h2>{{title}}</h2>
+      <div class="body">
+        {{{body}}}
+      </div>
+    </div>
+  </script>
+
   <!-- 编程语言列表模板 -->
   <script id="tpl2" type="text/x-handlebars-template">
     <div class="list">
@@ -51,16 +61,11 @@
   <!-- each 内置的 list -->
   <script id="tpl4" type="text/x-handlebars-template">
     <div class="inner-each-block-helper">
-      <!-- <h2>{{title}}</h2>
-      <ul id="list">
-        {{#each list}}
-          <li>{{this}}</li>
-        {{/each}}
-      </ul> -->
+      <h2>{{{title}}}</h2>
 
-      {{#if list}}
+      {{#if list.list}}
       <ul id="list">  
-          {{#each list}}
+          {{#each list.list}}
               <li>{{this}}</li>
           {{/each}}
       </ul>  
