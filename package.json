@@ -1,0 +1,25 @@
+{
+  "name": "handlebars-study",
+  "version": "0.0.0",
+  "description": "handlebarsjs 模板引擎学习使用记录",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "docs": "docsify serve docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jesonhu/handlebars-study.git"
+  },
+  "keywords": [
+    "handlebars"
+  ],
+  "author": "Jesonhu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jesonhu/handlebars-study/issues"
+  },
+  "homepage": "https://github.com/Jesonhu/handlebars-study#readme"
+}

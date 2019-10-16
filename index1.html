@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>handlebars-1</title>
+</head>
+
+<body>
+  <div id="root"></div>  
+
+  <!-- 基本测试模板 -->
+  <script id="tpl1" type="text/x-handlebars-template">
+    <div class="entry">
+      <h2>{{title}}</h2>
+      <div class="body">
+        {{body}}
+      </div>
+    </div>
+  </script>
+
+  <!-- 编程语言列表模板 -->
+  <script id="tpl2" type="text/x-handlebars-template">
+    <div class="list">
+      <h2>{{title}}</h2>
+      <div class="list">
+        <ul>
+          {{#programme}}
+           <li>{{language}}</li>
+          {{/programme}}
+        </ul>  
+      </div>
+    </div>
+  </script>
+
+  <!-- 内置 each 遍历模板 -->
+  <script id="tpl3" type="text/x-handlebars-template">
+    <div class="inner-each-block-helper">
+      <h2>{{title}}</h2>
+      <ul>
+        {{#each name}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </script>
+
+  <!-- 内置 each 遍历模板2 -->
+  <!-- each 内置的 list -->
+  <script id="tpl4" type="text/x-handlebars-template">
+    <div class="inner-each-block-helper">
+      <!-- <h2>{{title}}</h2>
+      <ul id="list">
+        {{#each list}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul> -->
+
+      {{#if list}}
+      <ul id="list">  
+          {{#each list}}
+              <li>{{this}}</li>
+          {{/each}}
+      </ul>  
+      {{else}}
+          <p>{{error}}</p>
+      {{/if}}
+    </div>
+  </script>
+
+  <script>
+    const loadManifest = {
+
+      init() {
+        return this.xhrMainifest();
+      },
+
+      xhrMainifest() {
+        return new Promise((resolve, reject) => {
+          const self = this;
+          const loadScript = this.loadScript;
+
+          const url = './manifest.json?v=' + Math.random();
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.addEventListener('load', function () {
+            const manifest = JSON.parse(xhr.response);
+            const list = manifest.initial.concat(manifest.project);
+            loadScript.call(self, list, () => {
+              resolve();
+            })
+          });
+          xhr.send(null);
+        });
+      },
+
+      /** 加载脚本 */
+      loadScript: function (list, callback) {
+        var loaded = 0;
+        const self = this;
+        const loadSingleScript = this.loadSingleScript;
+        var loadNext = function () {
+          self.loadSingleScript(list[loaded], function () {
+            loaded++;
+            if (loaded >= list.length) {
+              callback();
+            }
+            else {
+              loadNext();
+            }
+          })
+        };
+        loadNext();
+      },
+
+      loadSingleScript: function (src, callback) {
+        var s = document.createElement('script');
+        s.async = false;
+        s.src = src;
+        s.addEventListener('load', function () {
+          s.parentNode.removeChild(s);
+          s.removeEventListener('load', arguments.callee, false);
+          callback();
+        }, false);
+        document.body.appendChild(s);
+      }
+
+    }
+
+    loadManifest.init()
+      .then(res => {
+        project.init();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    const project = {
+      main: window.__MAIN__,
+      init() {
+        const main = this.main || window.__MAIN__;
+        main.init();
+      }
+    }
+  </script>
+</body>
+
+</html>

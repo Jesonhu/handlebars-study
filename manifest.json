@@ -1,0 +1,8 @@
+{
+  "initial": [
+    "resources/libs/handlebars/handlebars-v4.4.3.js"
+  ],
+  "project": [
+    "resources/js/main1.js"
+  ]
+}
