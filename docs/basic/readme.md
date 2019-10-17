@@ -144,22 +144,3 @@ document.getElementById('root').innerHTML += html;
 ```js
 const oTest = document.getElementById('testJsScript');
 ```
-
-## HTML Escaping
-
-```js
-const context = {
-  title: '我是标题',
-  content: "<div><p><strong><a href='http://www.baidu.com' target='_blank'><span>我是内容</span></a></strong><p></div>"
-}
-```
-
-```html
-{{{content}}}
-```
-
-注意使用 {{{ 而不是 {{
-
-相关官方说明:
-
-> Handlebars HTML-escapes values returned by a {{`expression`}}. If you don't want Handlebars to escape a value, use the "triple-stash", {{{.

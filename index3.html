@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script src="./resources/libs/handlebars/handlebars-v4.4.3.js"></script>
+    <script>
+
+      const str = `<div class="entry">
+        <h1>{{title}}</h1>
+        <div class="body">
+          {{#aaa}}{{body}}{{/aaa}}
+          {{#aaa}}{{person.body}}{{/aaa}}
+        </div>
+      </div>`
+      Handlebars.registerHelper("aaa", function(options) {
+        return '<span>' + options.fn(this) + '</span>';
+        // return new Handlebars.SafeString( '<span>1212' + options.fn(this) + '</span>' );
+      });
+      const context2 = {
+        title: '我是标题',
+        body: '我是内容内容',
+        person: {
+        name: '张三',
+        body: '我叫张三',
+        person: {
+          body: '我是张大',
+        }
+        }
+      }
+      const template2 = Handlebars.compile(str);
+      document.getElementById('root').innerHTML += template2(context2);
+    </script>
+</body>
+</html>
